@@ -27,9 +27,16 @@ fs.readFile(options.src, function (err, data) {
 
             console.log(options.verSettings);
             var gitInfo = gitDescribeSync();
-            console.log(gitInfo);
+            console.log(gitInfo.raw);
             var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + options.verSettings + "']")[0];
-            matches.$.value = "val";
+            if (gitInfo.tag) {
+                matches.$.value = gitInfo.tag;
+            }
+            else {
+                matches.$.value = gitInfo.raw;
+            }
+
+
         }
 
         //console.log(options.appSettings);
