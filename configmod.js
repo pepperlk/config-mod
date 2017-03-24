@@ -1,10 +1,10 @@
 #! /usr/bin/env node
 
 var fs = require('fs');
-var xml2js = require('xml2js');
+var xml2js = require('./xml2js');
 var parser = require('json-parser');
 var xpath = require("xml2js-xpath");
-const {gitDescribe, gitDescribeSync} = require('git-describe');
+const { gitDescribe, gitDescribeSync } = require('git-describe');
 
 var shell = require("shelljs");
 var commandLineArgs = require('command-line-args');
