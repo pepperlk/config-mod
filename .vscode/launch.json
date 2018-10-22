@@ -10,7 +10,33 @@
             "name": "Launch Program",
             "program": "${workspaceRoot}\\configmod.js",
             "args": [
-                "web.config"
+                "web.config",
+                "-c", "VTSData:Data Source=ilmocdt3db16;Initial Catalog=IRMAP;User Id=irmapAdmin;Password=!rm@pAdm1n;",
+                 "-a", "EgisUrl:https://gis.dev.blm.doi.net/arcgisauth/rest/services/VMAP_locked/VMAP_gdb_test/FeatureServer", 
+                 "-a", "EgisToken:EMPTY",  
+                 "-a", "MockUsers:false" ,
+                 "-a", "SAML.Url:https://uat-vmap.blm.doi.net/" ,
+                 "-a", "Client|EsriConfig_CountyLayer:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BOC_Natl_CountyBoundaries/MapServer" ,
+                 "-a", "Client|EsriConfig_StateLayer:https://gis.blm.doi.net/arcgis/rest/services/admin_boundaries/BOC_Natl_StateBoundaries/MapServer" ,
+                 "-a", "Client|EsriConfig_AdminBoundary:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BLM_Natl_AdminUnit/MapServer" ,
+                 "-a", "Client|EsriConfig_VmapMapServiceUrl:https://gis.dev.blm.doi.net/arcgisauth/rest/services/VMAP_locked/VMAP/MapServer" ,
+                 "-a", "SmaSOEUrl:https://gis.test.blm.doi.net/arcgis/rest/services/lands/BLM_Natl_SMA_LimitedScale/MapServer/exts/AreasAndLengths/execute" ,
+                 "-a", "SmaLayerUrl:https://gis.test.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_with_PriUnk/MapServer/1" ,
+                 "-a", "CountySOEUrl:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BOC_Natl_CountyBoundaries/MapServer/exts/AreasAndLengths/execute" ,
+                 "-a", "CountyLayerUrl:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BOC_Natl_CountyBoundaries/MapServer/0" ,
+                 "-a", "AdminBndSOEUrl:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BLM_Natl_AdminUnit/MapServer/exts/AreasAndLengths/execute" ,
+                 "-a", "AdminBndFieldLayerUrl:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BLM_Natl_AdminUnit/MapServer/3" ,
+                 "-a", "SmaLayerID:1" ,
+                 "-a", "CountyLayerID:0" ,
+                 "-a", "AdminBndFieldLayerID:3" ,
+                 "-a", "AIkey:2afd60c2-1c06-4862-959d-9c0e5363823b" ,
+                 "-a", "AdminBndDistrictLayerUrl:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BLM_Natl_AdminUnit/MapServer/2" ,
+                 "-a", "AdminBndStateLayerUrl:https://gis.test.blm.doi.net/arcgis/rest/services/admin_boundaries/BLM_Natl_AdminUnit/MapServer/1" ,
+                 "-a", "MobileFeatureUrl:https://gis.dev.blm.doi.net/arcgisauth/rest/services/FC/BLM_Natl_VMAP_PostFC/FeatureServer" ,
+                 "-a", "MobileTreatmentComponentLocationID:9" ,
+                 "-a", "MobileTaskServiceURL:https://gis.dev.blm.doi.net/arcgisauth/rest/services/VMAP_locked" ,
+                 "-a", "Client|EsriConfig_IsMapEnvLocal:false" ,
+                 "-a", "ArcGisServerDomain:gis.dev.blm.doi.net"
             ]
         }
     ]
