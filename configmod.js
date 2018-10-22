@@ -4,16 +4,37 @@ var fs = require('fs');
 var xml2js = require('./xml2js');
 var parser = require('json-parser');
 var xpath = require("xml2js-xpath");
-const { gitDescribe, gitDescribeSync } = require('git-describe');
+const {
+    gitDescribe,
+    gitDescribeSync
+} = require('git-describe');
 
 var shell = require("shelljs");
 var commandLineArgs = require('command-line-args');
 var optionDefinitions = [
 
-    { name: 'src', type: String, defaultOption: true },
-    { name: 'appSettings', alias: 'a', multiple: true, type: String },
-    { name: 'connStrings', alias: 'c', multiple: true, type: String },
-    { name: 'verSettings', alias: 'v', type: String }
+    {
+        name: 'src',
+        type: String,
+        defaultOption: true
+    },
+    {
+        name: 'appSettings',
+        alias: 'a',
+        multiple: true,
+        type: String
+    },
+    {
+        name: 'connStrings',
+        alias: 'c',
+        multiple: true,
+        type: String
+    },
+    {
+        name: 'verSettings',
+        alias: 'v',
+        type: String
+    }
 ];
 
 var options = commandLineArgs(optionDefinitions)
@@ -30,10 +51,13 @@ fs.readFile(options.src, function (err, data) {
             console.log(gitInfo.raw);
             var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + options.verSettings + "']")[0];
             if (gitInfo.tag) {
-                matches.$.value = gitInfo.tag;
-            }
-            else {
-                matches.$.value = gitInfo.raw;
+                if (matches && matches.$) {
+                    matches.$.value = gitInfo.tag;
+                }
+            } else {
+                if (matches && matches.$) {
+                    matches.$.value = gitInfo.raw;
+                }
             }
 
 
@@ -49,7 +73,9 @@ fs.readFile(options.src, function (err, data) {
                 console.log(optsVals[0] + ":" + val);
 
                 var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + optsVals[0] + "']")[0];
-                matches.$.value = val;
+                if (matches && matches.$) {
+                    matches.$.value = val;
+                }
 
             }
         }
@@ -63,7 +89,9 @@ fs.readFile(options.src, function (err, data) {
 
 
                 var matches = xpath.find(result, "/configuration/connectionStrings//add[@name='" + optsVals[0] + "']")[0];
-                matches.$.connectionString = val;
+                if (matches && matches.$) {
+                    matches.$.connectionString = val;
+                }
 
             }
         }
