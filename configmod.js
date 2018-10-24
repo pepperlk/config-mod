@@ -46,18 +46,22 @@ fs.readFile(options.src, function (err, data) {
 
         if (options.verSettings && options.verSettings.length > 1) {
 
-            console.log(options.verSettings);
-            var gitInfo = gitDescribeSync();
-            console.log(gitInfo.raw);
-            var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + options.verSettings + "']")[0];
-            if (gitInfo.tag) {
-                if (matches && matches.$) {
-                    matches.$.value = gitInfo.tag;
+            try {
+                console.log(options.verSettings);
+                var gitInfo = gitDescribeSync();
+                console.log(gitInfo.raw);
+                var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + options.verSettings + "']")[0];
+                if (gitInfo.tag) {
+                    if (matches && matches.$) {
+                        matches.$.value = gitInfo.tag;
+                    }
+                } else {
+                    if (matches && matches.$) {
+                        matches.$.value = gitInfo.raw;
+                    }
                 }
-            } else {
-                if (matches && matches.$) {
-                    matches.$.value = gitInfo.raw;
-                }
+            } catch (e) {
+                console.log(e);
             }
 
 
@@ -67,14 +71,17 @@ fs.readFile(options.src, function (err, data) {
         if (options.appSettings) {
             for (var a = 0; a < options.appSettings.length; a++) {
 
+                try {
+                    var optsVals = options.appSettings[a].split(':');
+                    var val = options.appSettings[a].substring(optsVals[0].length + 1);
+                    console.log(optsVals[0] + ":" + val);
 
-                var optsVals = options.appSettings[a].split(':');
-                var val = options.appSettings[a].substring(optsVals[0].length + 1);
-                console.log(optsVals[0] + ":" + val);
-
-                var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + optsVals[0] + "']")[0];
-                if (matches && matches.$) {
-                    matches.$.value = val;
+                    var matches = xpath.find(result, "/configuration/appSettings//add[@key='" + optsVals[0] + "']")[0];
+                    if (matches && matches.$) {
+                        matches.$.value = val;
+                    }
+                } catch (e) {
+                    console.log(e);
                 }
 
             }
@@ -82,15 +89,18 @@ fs.readFile(options.src, function (err, data) {
         if (options.connStrings) {
             for (var a = 0; a < options.connStrings.length; a++) {
 
+                try {
+                    var optsVals = options.connStrings[a].split(':');
+                    var val = options.connStrings[a].substring(optsVals[0].length + 1);
+                    console.log(optsVals[0] + ":" + val);
 
-                var optsVals = options.connStrings[a].split(':');
-                var val = options.connStrings[a].substring(optsVals[0].length + 1);
-                console.log(optsVals[0] + ":" + val);
 
-
-                var matches = xpath.find(result, "/configuration/connectionStrings//add[@name='" + optsVals[0] + "']")[0];
-                if (matches && matches.$) {
-                    matches.$.connectionString = val;
+                    var matches = xpath.find(result, "/configuration/connectionStrings//add[@name='" + optsVals[0] + "']")[0];
+                    if (matches && matches.$) {
+                        matches.$.connectionString = val;
+                    }
+                } catch (e) {
+                    console.log(e);
                 }
 
             }
